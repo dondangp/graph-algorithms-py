@@ -1,3 +1,5 @@
+# Re-defining the GraphKruskal class for Kruskal's Algorithm implementation
+
 class GraphKruskal:
     def __init__(self, vertices):
         self.V = vertices
@@ -43,3 +45,32 @@ class GraphKruskal:
                 self.union(parent, rank, x, y)
 
         return mst
+
+
+# Reconstructing the graph from the image for Kruskal's Algorithm
+graph_kruskal_test = GraphKruskal(9)  # 9 nodes: a, b, c, d, e, f, g, h, i
+
+# Adding edges with weights as per the image
+nodes = {"a": 0, "b": 1, "c": 2, "d": 3, "e": 4, "f": 5, "g": 6, "h": 7, "i": 8}
+graph_kruskal_test.add_edge(nodes["a"], nodes["b"], 4)
+graph_kruskal_test.add_edge(nodes["a"], nodes["h"], 8)
+graph_kruskal_test.add_edge(nodes["b"], nodes["h"], 11)
+graph_kruskal_test.add_edge(nodes["b"], nodes["c"], 8)
+graph_kruskal_test.add_edge(nodes["c"], nodes["i"], 2)
+graph_kruskal_test.add_edge(nodes["c"], nodes["f"], 4)
+graph_kruskal_test.add_edge(nodes["c"], nodes["d"], 7)
+graph_kruskal_test.add_edge(nodes["d"], nodes["f"], 14)
+graph_kruskal_test.add_edge(nodes["e"], nodes["f"], 10)
+graph_kruskal_test.add_edge(nodes["g"], nodes["f"], 2)
+graph_kruskal_test.add_edge(nodes["g"], nodes["h"], 1)
+graph_kruskal_test.add_edge(nodes["h"], nodes["i"], 7)
+graph_kruskal_test.add_edge(nodes["i"], nodes["g"], 6)
+
+# Running Kruskal's Algorithm to find the MST
+mst_result = graph_kruskal_test.kruskal()
+
+# Mapping indices back to node names for better readability
+node_names = {v: k for k, v in nodes.items()}
+mst_result_named = [(node_names[u], node_names[v], weight) for u, v, weight in mst_result]
+
+mst_result_named
